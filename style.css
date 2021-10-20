@@ -1,0 +1,132 @@
+body {
+  font-family: sans-serif;
+  background-color: #101010;
+
+  /* Horizontal and vertical center */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.calculator {
+  border: 5px solid #212121;
+  background-color: #010101;
+  color: #fafafa;
+  height: 580px;
+  width: 320px;
+  border-radius: 20px;
+}
+
+.exp-input {
+  font-family: sans-serif;
+  font-size: 23px;
+  background-color: #010101;
+  color: #fafafa;
+
+  width: 299px;
+  height: 80px;
+  padding: 0 0.45em;
+  margin-top: 10px;
+  border: none;
+  border-radius: 20px 20px 0 0;
+
+  overflow-y: scroll;
+  overflow: visible;
+  resize: none;
+
+  caret-color: #94fc13;
+  outline: none;
+  text-align: right;
+}
+
+.output {
+  color: #9b9b9b;
+  font-size: 23px;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  height: 7%;
+  margin: 5px 6.5%;
+}
+
+.controls {
+  height: 5%;
+  margin-bottom: 1.2em;
+}
+
+.btn-control {
+  font-size: 1.2em;
+  margin: 1px 1.35em;
+  padding: 0;
+  float: left;
+  color: #93fc13be;
+  background-color: inherit;
+  border: none;
+}
+
+.btn-control:hover {
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+/* Button click effect */
+.btn-control:active {
+  padding: 0.75px;
+}
+
+#history {
+  float: left;
+}
+
+#backspace {
+  float: right;
+}
+
+.keyboard {
+  margin-top: 1.2em;
+  padding: 0 0.5em;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0.5em 0.25em;
+  justify-items: center;
+}
+
+.btn-calc {
+  height: 60px;
+  width: 60px;
+  border: none;
+  padding: 10px;
+  background-color: #212121;
+  color: #fafafa;
+  border-radius: 50%;
+  font-size: 1.5em;
+}
+
+.btn-calc:hover {
+  cursor: pointer;
+  background-color: #343434;
+}
+
+/* Button click effect */
+.btn-calc:active {
+  font-size: 1.3em;
+}
+
+#clear {
+  color: #ff4c29;
+}
+
+.operator {
+  color: #94fc13;
+}
+
+#equals {
+  color: #fafafa;
+  font-weight: bold;
+  background-color: #427e04;
+}
