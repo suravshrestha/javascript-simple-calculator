@@ -33,9 +33,7 @@ body {
   border: none;
   border-radius: 20px 20px 0 0;
 
-  overflow-y: scroll;
-  overflow: visible;
-  resize: none;
+  overflow: auto;
 
   caret-color: #94fc13;
   outline: none;
