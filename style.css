@@ -122,6 +122,15 @@ body {
   color: #94fc13;
 }
 
+#negate {
+  font-size: 1.3em;
+}
+
+/* Button click effect */
+#negate:active {
+  font-size: 1.2em;
+}
+
 #equals {
   color: #fafafa;
   font-weight: bold;
