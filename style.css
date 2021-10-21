@@ -127,3 +127,7 @@ body {
   font-weight: bold;
   background-color: #427e04;
 }
+
+#equals:hover {
+  opacity: 0.85;
+}
