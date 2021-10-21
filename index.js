@@ -12,7 +12,8 @@ function evaluateExpression() {
   const expression = expInputEl.textContent
     .replace(/\u00D7/g, "*") // Unicode for × (&times;)
     .replace(/\u00F7/g, "/") // Unicode for ÷ (&divide;)
-    .replace(/\u2212/g, "-"); // Unicode for − (&minus;)
+    .replace(/\u2212/g, "-") // Unicode for − (&minus;)
+    .replace(/%/g, "/100");
 
   try {
     output.textContent = eval(expression);
@@ -58,7 +59,7 @@ operatorBtns.forEach((operatorBtn) => {
         span.textContent = " / ";
         break;
       case "percent":
-        span.textContent = `${e.target.textContent} `;
+        span.textContent = "%";
         break;
       default:
         span.textContent = ` ${e.target.textContent} `;
