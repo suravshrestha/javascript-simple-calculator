@@ -1,12 +1,28 @@
 const expInputEl = document.querySelector(".exp-input");
+const output = document.querySelector(".output");
 
 const numBtns = document.querySelectorAll(".num");
 const operatorBtns = document.querySelectorAll(".operator");
 
 const clearBtn = document.getElementById("clear");
 
+// Detect number and operator insertion (button click)
+expInputEl.addEventListener("DOMNodeInserted", () => {
+  const expression = expInputEl.textContent
+    .replace(/\u00D7/g, "*") // Unicode for × (&times;)
+    .replace(/\u00F7/g, "/") // Unicode for ÷ (&divide;)
+    .replace(/\u2212/g, "-"); // Unicode for − (&minus;)
+
+  try {
+    output.textContent = eval(expression);
+  } catch (error) {
+    output.textContent = "";
+  }
+});
+
 clearBtn.addEventListener("click", () => {
   expInputEl.textContent = "";
+  output.textContent = "";
 });
 
 numBtns.forEach((numBtn) => {
