@@ -81,11 +81,11 @@ operatorBtns.forEach((operatorBtn) => {
       return;
     }
 
-    const prevOperator = expInputEl.lastChild.textContent;
+    const prevText = expInputEl.lastChild.textContent;
     if (
-      (operatorClicked && prevOperator !== "%") ||
-      prevOperator === "(" ||
-      prevOperator === " × ("
+      (operatorClicked && prevText !== "%") ||
+      prevText === "(" ||
+      prevText === " × ("
     ) {
       // Repeating operators (except for %) or operator clicked after opening parenthesis
       return;
