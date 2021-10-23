@@ -76,12 +76,12 @@ numBtns.forEach((numBtn) => {
 
 operatorBtns.forEach((operatorBtn) => {
   operatorBtn.addEventListener("click", (e) => {
-    if (!expInputEl.lastChild) {
+    if (!expInputEl.lastElementChild) {
       // Empty input
       return;
     }
 
-    const prevText = expInputEl.lastChild.textContent;
+    const prevText = expInputEl.lastElementChild.textContent;
     if (
       (operatorClicked && prevText !== "%") ||
       prevText === "(" ||
@@ -140,7 +140,7 @@ equalsBtn.addEventListener("click", () => {
 });
 
 parenthesisBtn.addEventListener("click", () => {
-  const prevEl = expInputEl.lastChild;
+  const prevEl = expInputEl.lastElementChild;
   const prevText = prevEl ? prevEl.textContent : null;
 
   const openingParenthesisCount = (expInputEl.textContent.match(/[(]/g) || [])
