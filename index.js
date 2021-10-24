@@ -29,8 +29,8 @@ function evaluateExpression() {
   try {
     // For handling floating decimals
     // Show at most 10 decimals if necessary
-    output.textContent =
-      Math.round((eval(expression) + Number.EPSILON) * 10 ** 10) / 10 ** 10;
+    // output.textContent = Math.round((eval(expression) + Number.EPSILON) * 10 ** 10) / 10 ** 10;
+    output.textContent = eval(expression);
   } catch (error) {
     output.textContent = "";
   }
