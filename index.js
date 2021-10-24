@@ -10,6 +10,7 @@ const backspaceBtn = document.getElementById("backspace");
 const equalsBtn = document.getElementById("equals");
 const parenthesisBtn = document.getElementById("parenthesis");
 const negateBtn = document.getElementById("negate");
+const decimalBtn = document.getElementById("decimal");
 
 let equalsClicked = 0;
 let operatorClicked = 0;
@@ -255,4 +256,19 @@ negateBtn.addEventListener("click", () => {
     span.textContent = "(−";
     expInputEl.appendChild(span);
   }
+});
+
+decimalBtn.addEventListener("click", () => {
+  const expressionTokens = expInputEl.textContent.split(/[\s(−]/);
+  const lastNumber = expressionTokens[expressionTokens.length - 1];
+
+  if (/[.]/.test(lastNumber)) {
+    return;
+  }
+
+  const span = document.createElement("span");
+  span.textContent = ".";
+  span.style.color = "#fafafa";
+
+  expInputEl.appendChild(span);
 });
