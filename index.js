@@ -188,7 +188,7 @@ negateBtn.addEventListener("click", () => {
   span.style.color = "#fafafa";
 
   if (secondLastText === "(−" || secondLastText === " × (−") {
-    // Use of negate button after (negate button + number)
+    // Use of negate button after (negate button + digit)
     expInputEl.removeChild(secondLastEl);
   } else if (prevText === "(−") {
     // Use of negate button only
@@ -203,15 +203,44 @@ negateBtn.addEventListener("click", () => {
     expInputEl.removeChild(secondLastEl);
   } else if (/[0-9]/g.test(prevText)) {
     // Use of negate button after number
-    span.textContent = `(−${prevText}`;
-    expInputEl.removeChild(prevEl);
+    const expressionTokens = expInputEl.textContent.split(/[\s(−]/);
+    const lastNumber = expressionTokens[expressionTokens.length - 1];
+    let numberLength = lastNumber.length;
+
+    // Remove the digits of the last number
+    while (numberLength) {
+      const span = expInputEl.lastElementChild;
+      expInputEl.removeChild(span);
+      numberLength--;
+    }
+
+    const lastEl = expInputEl.lastElementChild;
+    const lastText = lastEl ? lastEl.textContent : null;
+
+    // Toggle negation
+    if (lastText === "(−") {
+      expInputEl.removeChild(lastEl);
+    } else {
+      const negateSpan = document.createElement("span");
+      negateSpan.textContent = "(−";
+      negateSpan.style.color = "#fafafa";
+      expInputEl.appendChild(negateSpan);
+    }
+
+    // Add the digits of the last number
+    for (const num of lastNumber.toString()) {
+      let numSpan = document.createElement("span");
+      numSpan.textContent = num;
+      numSpan.style.color = "#fafafa";
+      expInputEl.appendChild(numSpan);
+    }
   } else if (prevText === "%") {
-    span.innerHTML = `<span style="color:#94fc13"> × </span><span>(−</span>`;
     // % changes to % × (-
+    span.innerHTML = `<span style="color:#94fc13"> × </span><span>(−</span>`;
+    expInputEl.appendChild(span);
   } else {
     // Empty previous text or an operator (+, −, ×, ÷)
     span.textContent = "(−";
+    expInputEl.appendChild(span);
   }
-
-  expInputEl.appendChild(span);
 });
