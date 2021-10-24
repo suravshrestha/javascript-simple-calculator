@@ -43,7 +43,7 @@ clearBtn.addEventListener("click", () => {
 
 backspaceBtn.addEventListener("click", () => {
   const span = expInputEl.lastElementChild;
-  const prevText = span.textContent;
+  const prevText = span ? span.textContent : null;
 
   if (/ [+−×/] /.test(prevText) || prevText === " × (") {
     operatorClicked = 0;
