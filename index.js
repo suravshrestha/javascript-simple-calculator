@@ -146,12 +146,14 @@ parenthesisBtn.addEventListener("click", () => {
   const prevEl = expInputEl.lastElementChild;
   const prevText = prevEl ? prevEl.textContent : null;
 
-  const openingParenthesisCount = (expInputEl.textContent.match(/[(]/g) || [])
-    .length;
-  const closingParenthesisCount = (expInputEl.textContent.match(/[)]/g) || [])
-    .length;
-  const unclosedParenthesisCount =
-    openingParenthesisCount - closingParenthesisCount;
+  let unclosedParenthesisCount = 0;
+  for (const curChar of expInputEl.textContent) {
+    if (curChar === "(") {
+      unclosedParenthesisCount++;
+    } else if (curChar === ")") {
+      unclosedParenthesisCount--;
+    }
+  }
 
   const span = document.createElement("span");
   span.style.color = "#fafafa";
