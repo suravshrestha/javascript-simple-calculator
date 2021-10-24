@@ -45,7 +45,7 @@ backspaceBtn.addEventListener("click", () => {
   const span = expInputEl.lastElementChild;
   const prevText = span ? span.textContent : null;
 
-  if (/ [+−×/] /.test(prevText) || prevText === " × (") {
+  if (/[+−×/(]/.test(prevText)) {
     operatorClicked = 0;
   }
 
@@ -156,17 +156,14 @@ parenthesisBtn.addEventListener("click", () => {
   const span = document.createElement("span");
   span.style.color = "#fafafa";
 
-  if (
-    prevText === "(" ||
-    prevText === " × (" ||
-    prevText === "(−" ||
-    / [+−×/] /.test(prevText)
-  ) {
+  if (/[(+−×/]/.test(prevText)) {
+    // Parenthesis button clicked after opening parenthesis or negate button or +,−,×, or /
     span.textContent = "(";
     openingParenthesisClicked = 1;
   } else if (unclosedParenthesisCount >= 1) {
     span.textContent = ")";
-  } else if (/[0-9]/.test(prevText) || prevText === ")") {
+  } else if (/[0-9)]/.test(prevText)) {
+    // Parenthesis button clicked after number or )
     span.innerHTML = `<span style="color:#94fc13"> &times;</span><span> (</span>`;
     openingParenthesisClicked = 1;
   } else {
