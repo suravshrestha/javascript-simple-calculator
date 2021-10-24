@@ -16,11 +16,14 @@ let operatorClicked = 0;
 let openingParenthesisClicked = 0;
 
 function evaluateExpression() {
-  const expression = expInputEl.textContent
+  let expression = expInputEl.textContent
     .replace(/\u00D7/g, "*") // Unicode for × (&times;)
     .replace(/\u00F7/g, "/") // Unicode for ÷ (&divide;)
     .replace(/\u2212/g, "-") // Unicode for − (&minus;)
     .replace(/%/g, "/100");
+
+  // Close the unclosed parentheses
+  expression += ")".repeat(unclosedParenthesisCount());
 
   try {
     // For handling floating decimals
@@ -30,6 +33,19 @@ function evaluateExpression() {
   } catch (error) {
     output.textContent = "";
   }
+}
+
+function unclosedParenthesisCount() {
+  let unclosed = 0;
+  for (const curChar of expInputEl.textContent) {
+    if (curChar === "(") {
+      unclosed++;
+    } else if (curChar === ")") {
+      unclosed--;
+    }
+  }
+
+  return unclosed;
 }
 
 // Detect number and operator insertion (button click)
@@ -149,15 +165,6 @@ parenthesisBtn.addEventListener("click", () => {
   const prevEl = expInputEl.lastElementChild;
   const prevText = prevEl ? prevEl.textContent : null;
 
-  let unclosedParenthesisCount = 0;
-  for (const curChar of expInputEl.textContent) {
-    if (curChar === "(") {
-      unclosedParenthesisCount++;
-    } else if (curChar === ")") {
-      unclosedParenthesisCount--;
-    }
-  }
-
   const span = document.createElement("span");
   span.style.color = "#fafafa";
 
@@ -165,7 +172,7 @@ parenthesisBtn.addEventListener("click", () => {
     // Parenthesis button clicked after opening parenthesis or negate button or +,−,×, or /
     span.textContent = "(";
     openingParenthesisClicked = 1;
-  } else if (unclosedParenthesisCount >= 1) {
+  } else if (unclosedParenthesisCount() >= 1) {
     span.textContent = ")";
   } else if (/[0-9)]/.test(prevText)) {
     // Parenthesis button clicked after number or )
