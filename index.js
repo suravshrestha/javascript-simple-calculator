@@ -9,6 +9,7 @@ const backspaceBtn = document.getElementById("backspace");
 
 const equalsBtn = document.getElementById("equals");
 const parenthesisBtn = document.getElementById("parenthesis");
+const negateBtn = document.getElementById("negate");
 
 let equalsClicked = 0;
 let operatorClicked = 0;
@@ -76,18 +77,16 @@ numBtns.forEach((numBtn) => {
 
 operatorBtns.forEach((operatorBtn) => {
   operatorBtn.addEventListener("click", (e) => {
-    if (!expInputEl.lastElementChild) {
-      // Empty input
-      return;
-    }
+    const prevEl = expInputEl.lastElementChild;
+    const prevText = prevEl ? prevEl.textContent : null;
 
-    const prevText = expInputEl.lastElementChild.textContent;
     if (
-      (operatorClicked && prevText !== "%") ||
-      prevText === "(" ||
-      prevText === " × ("
+      ((!prevEl || /[×/(× (]/.test(prevText)) &&
+        e.target.textContent !== "−") ||
+      /(?![%])[+−]/.test(prevText)
     ) {
-      // Repeating operators (except for %) or operator clicked after opening parenthesis
+      // Empty input (except first operator is −)
+      // Repeating operators (except for %) or operator (except for −) clicked after × or / or opening parenthesis
       return;
     }
 
@@ -110,11 +109,15 @@ operatorBtns.forEach((operatorBtn) => {
         span.textContent = "%";
         break;
       default:
-        span.textContent = ` ${e.target.textContent} `;
+        // If - after opening parenthesisBtn, space not required around -
+        span.textContent = /[(x(]/.test(prevText)
+          ? "−"
+          : ` ${e.target.textContent} `;
         break;
     }
 
-    span.style.color = "#94fc13";
+    // If - after opening parenthesis, white color for -
+    span.style.color = /[(x(]/.test(prevText) ? "#fafafa" : "#94fc13";
 
     expInputEl.appendChild(span);
   });
@@ -153,7 +156,12 @@ parenthesisBtn.addEventListener("click", () => {
   const span = document.createElement("span");
   span.style.color = "#fafafa";
 
-  if (prevText === "(" || prevText === " × (" || / [+−×/] /.test(prevText)) {
+  if (
+    prevText === "(" ||
+    prevText === " × (" ||
+    prevText === "(−" ||
+    / [+−×/] /.test(prevText)
+  ) {
     span.textContent = "(";
     openingParenthesisClicked = 1;
   } else if (unclosedParenthesisCount >= 1) {
@@ -164,6 +172,48 @@ parenthesisBtn.addEventListener("click", () => {
   } else {
     span.textContent = "(";
     openingParenthesisClicked = 1;
+  }
+
+  expInputEl.appendChild(span);
+});
+
+negateBtn.addEventListener("click", () => {
+  const prevEl = expInputEl.lastElementChild;
+  const prevText = prevEl ? prevEl.textContent : null;
+
+  const secondLastEl = prevEl ? prevEl.previousElementSibling : null;
+  const secondLastText = secondLastEl ? secondLastEl.textContent : null;
+
+  const thirdLastEl = secondLastEl ? secondLastEl.previousElementSibling : null;
+  const thirdLastText = thirdLastEl ? thirdLastEl.textContent : null;
+
+  const span = document.createElement("span");
+  span.style.color = "#fafafa";
+
+  if (secondLastText === "(−" || secondLastText === " × (−") {
+    // Use of negate button after (negate button + number)
+    expInputEl.removeChild(secondLastEl);
+  } else if (prevText === "(−") {
+    // Use of negate button only
+    expInputEl.removeChild(prevEl);
+  } else if (secondLastText === "−" && thirdLastText === "(") {
+    // Use of negate button after ('(' + '-' + number)
+    expInputEl.removeChild(secondLastEl);
+    expInputEl.removeChild(thirdLastEl);
+  } else if (prevText === "−" && secondLastText === "(") {
+    // Use of negate button after ('(' + '-')
+    expInputEl.removeChild(prevEl);
+    expInputEl.removeChild(secondLastEl);
+  } else if (/[0-9]/g.test(prevText)) {
+    // Use of negate button after number
+    span.textContent = `(−${prevText}`;
+    expInputEl.removeChild(prevEl);
+  } else if (prevText === "%") {
+    span.innerHTML = `<span style="color:#94fc13"> × </span><span>(−</span>`;
+    // % changes to % × (-
+  } else {
+    // Empty previous text or an operator (+, −, ×, ÷)
+    span.textContent = "(−";
   }
 
   expInputEl.appendChild(span);
