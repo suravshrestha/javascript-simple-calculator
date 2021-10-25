@@ -113,14 +113,25 @@ body {
 
 .clear-history-btn {
   color: #fafafa;
-  background-color: #3baf05;
-  font-weight: 700;
+  background-color: #427e04;
+  font-weight: bold;
+  font-size: 18px;
 
   width: 185px;
   height: 40px;
   border-radius: 20px;
   border: none;
+  outline: none;
   text-align: center;
+}
+
+.clear-history-btn:hover {
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.clear-history-btn:active {
+  font-size: 17px;
 }
 
 #backspace {
