@@ -12,6 +12,9 @@ const parenthesisBtn = document.getElementById("parenthesis");
 const negateBtn = document.getElementById("negate");
 const decimalBtn = document.getElementById("decimal");
 
+const historyBtn = document.getElementById("history");
+const keyboard = document.querySelector(".keyboard");
+
 let equalsClicked = 0;
 let operatorClicked = 0;
 let openingParenthesisClicked = 0;
@@ -289,4 +292,29 @@ decimalBtn.addEventListener("click", () => {
   span.style.color = "#fafafa";
 
   expInputEl.appendChild(span);
+});
+
+historyBtn.addEventListener("click", () => {
+  const mainDiv = document.createElement("div");
+  const historyDiv = document.createElement("div");
+
+  const clearHistoryDiv = document.createElement("div");
+  const clearHistoryBtn = document.createElement("button");
+
+  mainDiv.className = "history-main-div";
+
+  historyDiv.className = "history-div";
+  historyDiv.textContent = "";
+
+  clearHistoryDiv.className = "clear-history-div";
+
+  clearHistoryBtn.className = "clear-history-btn";
+  clearHistoryBtn.textContent = "Clear history";
+
+  clearHistoryDiv.appendChild(clearHistoryBtn);
+
+  mainDiv.appendChild(historyDiv);
+  mainDiv.appendChild(clearHistoryDiv);
+
+  keyboard.appendChild(mainDiv);
 });

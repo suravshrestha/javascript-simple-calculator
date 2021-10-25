@@ -79,6 +79,50 @@ body {
   float: left;
 }
 
+.history-main-div {
+  position: absolute;
+}
+
+.history-div {
+  color: #fafafa;
+  background-color: #010101;
+  font-family: sans-serif;
+  font-size: 20px;
+
+  position: relative;
+  width: 301px;
+  height: 267px;
+  padding: 10px;
+  outline: none;
+  text-align: right;
+
+  overflow-y: auto;
+}
+
+.clear-history-div {
+  background-color: #010101;
+
+  display: flex;
+  justify-content: center; /* Horizontally centered */
+  align-items: center; /* Vertically centered */
+
+  width: 321px;
+  height: 74px;
+  border-radius: 0 0 17px 17px;
+}
+
+.clear-history-btn {
+  color: #fafafa;
+  background-color: #3baf05;
+  font-weight: 700;
+
+  width: 185px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  text-align: center;
+}
+
 #backspace {
   float: right;
 }
