@@ -295,6 +295,16 @@ decimalBtn.addEventListener("click", () => {
 });
 
 historyBtn.addEventListener("click", () => {
+  historyBtn.classList.toggle("bi-clock-history");
+  historyBtn.classList.toggle("bi-calculator");
+
+  if (historyBtn.classList.contains("bi-clock-history")) {
+    const historyMainDiv = document.querySelector(".history-main-div");
+    keyboard.removeChild(historyMainDiv);
+
+    return;
+  }
+
   const mainDiv = document.createElement("div");
   const historyDiv = document.createElement("div");
 
