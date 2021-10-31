@@ -46,6 +46,16 @@ class Store {
   static addCalculation(calculation) {
     const calculations = Store.getCalculations();
 
+    if (calculations.length != 0) {
+      const { expression: currentExpression } = calculation;
+      const { expression: prevExpression } = calculations[0];
+
+      if (currentExpression === prevExpression) {
+        // Previous calculation is the same as current
+        return;
+      }
+    }
+
     calculations.unshift(calculation); // For displaying the recent calculation at the top
 
     localStorage.setItem("calculations", JSON.stringify(calculations));
