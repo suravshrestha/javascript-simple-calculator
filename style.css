@@ -94,9 +94,20 @@ body {
   height: 267px;
   padding: 10px;
   outline: none;
-  text-align: right;
 
   overflow-y: auto;
+}
+
+.history-calculation {
+  font-size: 18px;
+  margin-left: 18px;
+  margin-bottom: 18px;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.history-answer {
+  color: #93fc13be;
 }
 
 .clear-history-div {

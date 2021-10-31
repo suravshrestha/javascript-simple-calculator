@@ -19,6 +19,66 @@ let equalsClicked = 0;
 let operatorClicked = 0;
 let openingParenthesisClicked = 0;
 
+// Represents a calculation history
+class Calculation {
+  constructor(expression, answer) {
+    this.expression = expression;
+    this.answer = answer;
+  }
+}
+
+// Handles Storage
+class Store {
+  static getCalculations() {
+    let calculations;
+
+    if (localStorage.getItem("calculations") === null) {
+      calculations = []; // Initialize
+    } else {
+      // Local storage stores the data in string format
+      // Convert the string data into array of JSON data
+      calculations = JSON.parse(localStorage.getItem("calculations"));
+    }
+
+    return calculations;
+  }
+
+  static addCalculation(calculation) {
+    const calculations = Store.getCalculations();
+
+    calculations.push(calculation);
+
+    localStorage.setItem("calculations", JSON.stringify(calculations));
+  }
+}
+
+// Handles UI tasks for calculation history
+class CalculationHistoryUI {
+  static displayCalcuations() {
+    const historyDiv = document.querySelector(".history-div");
+
+    const calculations = Store.getCalculations();
+    calculations.reverse(); // For placing the recent calculation at the top
+
+    calculations.forEach((calculation) => {
+      const calcDiv = document.createElement("div");
+      const expressionDiv = document.createElement("div");
+      const answerDiv = document.createElement("div");
+
+      calcDiv.className = "history-calculation";
+      answerDiv.className = "history-answer";
+
+      expressionDiv.textContent = calculation.expression;
+      answerDiv.textContent = " = " + calculation.answer;
+
+      calcDiv.appendChild(expressionDiv);
+      calcDiv.appendChild(answerDiv);
+
+      historyDiv.appendChild(calcDiv);
+    });
+  }
+}
+
 function evaluateExpression() {
   let expression = expInputEl.textContent
     .replace(/\u00D7/g, "*") // Unicode for × (&times;)
@@ -172,15 +232,26 @@ equalsBtn.addEventListener("click", () => {
 
   equalsClicked = 1;
 
+  const answer = output.textContent;
+
+  if (answer === "") {
+    return;
+  }
+
+  const expression = expInputEl.textContent;
+
+  // Instantiate calculation history
+  const calculationHistory = new Calculation(expression, answer);
+
+  // Add calculation history to storage
+  Store.addCalculation(calculationHistory);
+
   const span = document.createElement("span");
   span.style.color = "#94fc13";
-  span.textContent = output.textContent;
+  span.textContent = answer;
 
   expInputEl.textContent = "";
-
   expInputEl.appendChild(span);
-
-  output.textContent = "";
 });
 
 parenthesisBtn.addEventListener("click", () => {
@@ -327,4 +398,6 @@ historyBtn.addEventListener("click", () => {
   mainDiv.appendChild(clearHistoryDiv);
 
   keyboard.appendChild(mainDiv);
+
+  CalculationHistoryUI.displayCalcuations();
 });
