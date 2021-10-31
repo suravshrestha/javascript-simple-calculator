@@ -46,7 +46,7 @@ class Store {
   static addCalculation(calculation) {
     const calculations = Store.getCalculations();
 
-    calculations.push(calculation);
+    calculations.unshift(calculation); // For displaying the recent calculation at the top
 
     localStorage.setItem("calculations", JSON.stringify(calculations));
   }
@@ -58,7 +58,6 @@ class CalculationHistoryUI {
     const historyDiv = document.querySelector(".history-div");
 
     const calculations = Store.getCalculations();
-    calculations.reverse(); // For placing the recent calculation at the top
 
     calculations.forEach((calculation) => {
       const calcDiv = document.createElement("div");
