@@ -414,4 +414,9 @@ historyBtn.addEventListener("click", () => {
   keyboard.appendChild(mainDiv);
 
   CalculationHistoryUI.displayCalcuations();
+
+  clearHistoryBtn.addEventListener("click", () => {
+    localStorage.setItem("calculations", JSON.stringify([])); // Clear the local storage
+    historyDiv.textContent = "";
+  });
 });
