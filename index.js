@@ -360,6 +360,11 @@ negateBtn.addEventListener("click", () => {
 });
 
 decimalBtn.addEventListener("click", () => {
+  if (expInputEl.lastElementChild === null) {
+    // First decimal
+    return;
+  }
+
   const expressionTokens = expInputEl.textContent.split(/[\s(−]/);
   const lastNumber = expressionTokens[expressionTokens.length - 1];
 
