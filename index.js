@@ -154,7 +154,7 @@ function unclosedParenthesisCount() {
   return unclosed;
 }
 
-// Detect changes to the input element (button click)
+// Detect changes made to expression input element
 // Options for the observer (which mutations to observe)
 const config = { childList: true };
 
