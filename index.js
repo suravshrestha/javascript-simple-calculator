@@ -211,8 +211,18 @@ numBtns.forEach((numBtn) => {
     openingParenthesisClicked = 0;
 
     const span = document.createElement("span");
-    span.textContent = e.target.textContent;
-    span.style.color = "#fafafa";
+
+    if (
+      expInputEl.lastElementChild &&
+      expInputEl.lastElementChild.textContent === "%"
+    ) {
+      span.innerHTML =
+        `<span style="color: #94fc13"> &times; </span>` +
+        `<span style="color: #fafafa">${e.target.textContent}</span>`;
+    } else {
+      span.textContent = e.target.textContent;
+      span.style.color = "#fafafa";
+    }
 
     expInputEl.appendChild(span);
   });
