@@ -165,6 +165,10 @@ function callback(mutationsList, observer) {
     if (mutation.type === "childList") {
       // A chlid node has been added or removed
       evaluateExpression();
+
+      if (expInputEl.lastElementChild) {
+        expInputEl.lastElementChild.scrollIntoView();
+      }
     }
   }
 }
