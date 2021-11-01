@@ -148,12 +148,12 @@ body {
   text-align: center;
 }
 
-.clear-history-btn:hover {
+.clear-history-btn.hover:hover {
   cursor: pointer;
   opacity: 0.85;
 }
 
-.clear-history-btn:active {
+.clear-history-btn.active:active {
   font-size: 17px;
 }
 

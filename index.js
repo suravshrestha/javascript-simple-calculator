@@ -72,6 +72,9 @@ class CalculationHistoryUI {
 
     if (calculations.length === 0) {
       // Empty history
+      clearHistoryBtn.classList.remove("hover");
+      clearHistoryBtn.classList.remove("active");
+
       const messageDiv = document.createElement("div");
       messageDiv.textContent =
         "Calculations that you save with equals button appear here";
@@ -451,7 +454,7 @@ historyBtn.addEventListener("click", () => {
 
   clearHistoryDiv.className = "clear-history-div";
 
-  clearHistoryBtn.className = "clear-history-btn";
+  clearHistoryBtn.className = "clear-history-btn hover active";
   clearHistoryBtn.textContent = "Clear history";
 
   clearHistoryDiv.appendChild(clearHistoryBtn);
