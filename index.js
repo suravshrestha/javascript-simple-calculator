@@ -84,6 +84,31 @@ class CalculationHistoryUI {
       calcDiv.appendChild(answerDiv);
 
       historyDiv.appendChild(calcDiv);
+
+      calcDiv.addEventListener("click", () => {
+        expInputEl.textContent = "";
+
+        const expression = calcDiv.firstElementChild.textContent;
+
+        for (const char of expression) {
+          const charEl = document.createElement("span");
+          charEl.textContent = char;
+
+          if (
+            expInputEl.lastElementChild !== null &&
+            /[(x(]/.test(expInputEl.lastElementChild.textContent) &&
+            char === "−"
+          ) {
+            // If − after opening parenthesis, white color for −
+            charEl.style.color = "#fafafa";
+          } else {
+            // White color for char other than +, −, ×, /, %
+            charEl.style.color = /[+−×/%]/.test(char) ? "#94fc13" : "#fafafa";
+          }
+
+          expInputEl.appendChild(charEl);
+        }
+      });
     });
   }
 }
