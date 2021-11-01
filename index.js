@@ -66,8 +66,25 @@ class Store {
 class CalculationHistoryUI {
   static displayCalcuations() {
     const historyDiv = document.querySelector(".history-div");
+    const clearHistoryBtn = document.querySelector(".clear-history-btn");
 
     const calculations = Store.getCalculations();
+
+    if (calculations.length === 0) {
+      // Empty history
+      const messageDiv = document.createElement("div");
+      messageDiv.textContent =
+        "Calculations that you save with equals button appear here";
+      messageDiv.className = "empty-history-message";
+
+      historyDiv.appendChild(messageDiv);
+      return;
+    }
+
+    const messageDiv = document.querySelector(".empty-history-message");
+    if (messageDiv) {
+      expInputEl.removeChild(messageDiv);
+    }
 
     calculations.forEach((calculation) => {
       const calcDiv = document.createElement("div");
@@ -109,6 +126,12 @@ class CalculationHistoryUI {
           expInputEl.appendChild(charEl);
         }
       });
+    });
+
+    clearHistoryBtn.addEventListener("click", () => {
+      localStorage.setItem("calculations", JSON.stringify([])); // Clear the local storage
+      historyDiv.textContent = "";
+      CalculationHistoryUI.displayCalcuations();
     });
   }
 }
@@ -439,9 +462,4 @@ historyBtn.addEventListener("click", () => {
   keyboard.appendChild(mainDiv);
 
   CalculationHistoryUI.displayCalcuations();
-
-  clearHistoryBtn.addEventListener("click", () => {
-    localStorage.setItem("calculations", JSON.stringify([])); // Clear the local storage
-    historyDiv.textContent = "";
-  });
 });

@@ -98,6 +98,18 @@ body {
   overflow-y: auto;
 }
 
+.empty-history-message {
+  font-size: small;
+  opacity: 0.85;
+  border: 4px solid #212121;
+  border-radius: 10px;
+
+  padding: 12px 10px;
+  text-align: center;
+  margin-top: 25%;
+  margin-bottom: 25%;
+}
+
 .history-calculation {
   font-size: 18px;
   margin-left: 18px;
