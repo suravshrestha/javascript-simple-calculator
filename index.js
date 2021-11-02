@@ -90,20 +90,31 @@ class CalculationHistoryUI {
     }
 
     calculations.forEach((calculation) => {
+      const container = document.createElement("div");
+
       const calcDiv = document.createElement("div");
       const expressionDiv = document.createElement("div");
       const answerDiv = document.createElement("div");
 
+      const deleteCalculationBtn = document.createElement("i");
+
+      container.className = "history-calculation-container";
       calcDiv.className = "history-calculation";
       answerDiv.className = "history-answer";
+      deleteCalculationBtn.className = "bi bi-trash delete-calculation-btn";
 
       expressionDiv.innerHTML = calculation.expression;
       answerDiv.textContent = " = " + calculation.answer;
 
+      deleteCalculationBtn.setAttribute("title", "Delete this calculation");
+
       calcDiv.appendChild(expressionDiv);
       calcDiv.appendChild(answerDiv);
 
-      historyDiv.appendChild(calcDiv);
+      container.appendChild(calcDiv);
+      container.appendChild(deleteCalculationBtn);
+
+      historyDiv.appendChild(container);
 
       calcDiv.addEventListener("click", () => {
         expInputEl.textContent = "";

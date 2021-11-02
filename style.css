@@ -110,16 +110,39 @@ body {
   margin-bottom: 25%;
 }
 
-.history-calculation {
-  font-size: 18px;
+.history-calculation-container {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
   margin-left: 18px;
   margin-bottom: 18px;
-  width: fit-content;
+}
+
+.history-calculation {
+  font-size: 18px;
   cursor: pointer;
 }
 
 .history-answer {
   color: #93fc13be;
+}
+
+.delete-calculation-btn {
+  font-size: 1rem;
+  color: white;
+  background-color: inherit;
+
+  display: grid;
+  justify-content: end;
+  margin: auto 0.5em auto 1em;
+}
+
+.delete-calculation-btn:hover {
+  color: #dc3545;
+  cursor: pointer;
+}
+
+.delete-calculation-btn:active {
+  font-size: 0.95rem;
 }
 
 .clear-history-div {
