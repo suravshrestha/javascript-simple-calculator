@@ -60,6 +60,30 @@ class Store {
 
     localStorage.setItem("calculations", JSON.stringify(calculations));
   }
+
+  static removeCalculation(calculationIdx) {
+    const calculations = Store.getCalculations();
+
+    calculations.splice(calculationIdx, 1);
+    localStorage.setItem("calculations", JSON.stringify(calculations));
+
+    if (calculations.length === 0) {
+      const historyDiv = document.querySelector(".history-div");
+      const clearHistoryBtn = document.querySelector(".clear-history-btn");
+
+      // Empty history
+      clearHistoryBtn.classList.remove("hover");
+      clearHistoryBtn.classList.remove("active");
+
+      const messageDiv = document.createElement("div");
+      messageDiv.textContent =
+        "Calculations that you save with equals button appear here";
+      messageDiv.className = "empty-history-message";
+
+      historyDiv.appendChild(messageDiv);
+      return;
+    }
+  }
 }
 
 // Handles UI tasks for calculation history
@@ -122,6 +146,20 @@ class CalculationHistoryUI {
         const expression = calcDiv.firstElementChild.innerHTML;
         expInputEl.innerHTML = expression;
       });
+
+      deleteCalculationBtn.addEventListener("click", (e) => {
+        const historyCalculationContainer = e.target.parentElement;
+
+        const calculationIdx = [
+          ...historyCalculationContainer.parentElement.children,
+        ].indexOf(historyCalculationContainer);
+
+        // Remove the calculation from UI
+        CalculationHistoryUI.deleteCalculation(historyCalculationContainer);
+
+        // Remove the calculation from storage
+        Store.removeCalculation(calculationIdx);
+      });
     });
 
     clearHistoryBtn.addEventListener("click", () => {
@@ -129,6 +167,12 @@ class CalculationHistoryUI {
       historyDiv.textContent = "";
       CalculationHistoryUI.displayCalcuations();
     });
+  }
+
+  static deleteCalculation(historyCalculationContainer) {
+    historyCalculationContainer.parentElement.removeChild(
+      historyCalculationContainer
+    );
   }
 }
 
