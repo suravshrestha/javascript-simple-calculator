@@ -367,7 +367,9 @@ equalsBtn.addEventListener("click", () => {
 });
 
 parenthesisBtn.addEventListener("click", () => {
-  // equalsClicked = 0;
+  if (equalsClicked()) {
+    expInputEl.firstElementChild.style.color = "#fafafa";
+  }
 
   const prevEl = expInputEl.lastElementChild;
   const prevText = prevEl ? prevEl.textContent : null;
