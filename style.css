@@ -130,7 +130,12 @@ body {
 .history-calculation {
   font-size: 18px;
   padding: 9px;
+  padding-right: 0;
   cursor: pointer;
+}
+
+.history-expression {
+  word-wrap: break-word;
 }
 
 .history-answer {

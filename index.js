@@ -106,6 +106,7 @@ class CalculationHistoryUI {
 
       container.className = "history-calculation-container";
       calcDiv.className = "history-calculation";
+      expressionDiv.className = "history-expression";
       answerDiv.className = "history-answer";
       deleteCalculationBtn.className = "bi bi-trash delete-calculation-btn";
 
