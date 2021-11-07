@@ -268,7 +268,8 @@ numBtns.forEach((numBtn) => {
 
     if (
       expInputEl.lastElementChild &&
-      expInputEl.lastElementChild.textContent === "%"
+      (expInputEl.lastElementChild.textContent === "%" ||
+        expInputEl.lastElementChild.textContent === ")")
     ) {
       span.innerHTML =
         `<span style="color: #94fc13"> &times; </span>` +
