@@ -15,7 +15,6 @@ const decimalBtn = document.getElementById("decimal");
 const historyBtn = document.getElementById("history");
 const keyboard = document.querySelector(".keyboard");
 
-let equalsClicked = 0;
 let operatorClicked = 0;
 let openingParenthesisClicked = 0;
 
@@ -204,6 +203,17 @@ function unclosedParenthesisCount() {
   return unclosed;
 }
 
+function equalsClicked() {
+  if (
+    expInputEl.firstElementChild &&
+    expInputEl.firstElementChild.style.color === "rgb(148, 252, 19)"
+  ) {
+    return 1;
+  }
+
+  return 0;
+}
+
 // Detect changes made to expression input element
 // Options for the observer (which mutations to observe)
 const config = { childList: true };
@@ -233,7 +243,6 @@ clearBtn.addEventListener("click", () => {
   expInputEl.textContent = "";
   output.textContent = "";
 
-  equalsClicked = 0;
   operatorClicked = 0;
   openingParenthesisClicked = 0;
 });
@@ -255,12 +264,11 @@ backspaceBtn.addEventListener("click", () => {
 
 numBtns.forEach((numBtn) => {
   numBtn.addEventListener("click", (e) => {
-    if (equalsClicked && !operatorClicked) {
+    if (equalsClicked() && !operatorClicked) {
       // Clear the output if the user enters a number when result displayed in main display
       expInputEl.textContent = "";
     }
 
-    equalsClicked = 0;
     operatorClicked = 0;
     openingParenthesisClicked = 0;
 
@@ -298,13 +306,12 @@ operatorBtns.forEach((operatorBtn) => {
       return;
     }
 
-    if (equalsClicked) {
+    if (equalsClicked()) {
       // Change the color of the result in main display if the user enters an operator
       expInputEl.firstChild.style.color = "#fafafa";
     }
 
     operatorClicked = e.target.id === "percent" ? 0 : 1; // Allow operation if previous operator = %
-    equalsClicked = 0;
     openingParenthesisClicked = 0;
 
     const span = document.createElement("span");
@@ -332,12 +339,10 @@ operatorBtns.forEach((operatorBtn) => {
 });
 
 equalsBtn.addEventListener("click", () => {
-  if (equalsClicked) {
+  if (equalsClicked()) {
     // Multiple equals clicks
     return;
   }
-
-  equalsClicked = 1;
 
   const answer = output.textContent;
 
@@ -362,6 +367,8 @@ equalsBtn.addEventListener("click", () => {
 });
 
 parenthesisBtn.addEventListener("click", () => {
+  // equalsClicked = 0;
+
   const prevEl = expInputEl.lastElementChild;
   const prevText = prevEl ? prevEl.textContent : null;
 
@@ -374,8 +381,8 @@ parenthesisBtn.addEventListener("click", () => {
     openingParenthesisClicked = 1;
   } else if (unclosedParenthesisCount() >= 1) {
     span.textContent = ")";
-  } else if (/[0-9)]/.test(prevText)) {
-    // Parenthesis button clicked after number or )
+  } else if (/[0-9)%]/.test(prevText)) {
+    // Parenthesis button clicked after number or ) or %
     span.innerHTML = `<span style="color:#94fc13"> &times;</span><span> (</span>`;
     openingParenthesisClicked = 1;
   } else {
