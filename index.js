@@ -68,20 +68,11 @@ class Store {
     localStorage.setItem("calculations", JSON.stringify(calculations));
 
     if (calculations.length === 0) {
+      // Empty history
       const historyDiv = document.querySelector(".history-div");
       const clearHistoryBtn = document.querySelector(".clear-history-btn");
 
-      // Empty history
-      clearHistoryBtn.classList.remove("hover");
-      clearHistoryBtn.classList.remove("active");
-
-      const messageDiv = document.createElement("div");
-      messageDiv.textContent =
-        "Calculations that you save with equals button appear here";
-      messageDiv.className = "empty-history-message";
-
-      historyDiv.appendChild(messageDiv);
-      return;
+      CalculationHistoryUI.showEmptyHistoryMessage(historyDiv, clearHistoryBtn);
     }
   }
 }
@@ -96,15 +87,7 @@ class CalculationHistoryUI {
 
     if (calculations.length === 0) {
       // Empty history
-      clearHistoryBtn.classList.remove("hover");
-      clearHistoryBtn.classList.remove("active");
-
-      const messageDiv = document.createElement("div");
-      messageDiv.textContent =
-        "Calculations that you save with equals button appear here";
-      messageDiv.className = "empty-history-message";
-
-      historyDiv.appendChild(messageDiv);
+      CalculationHistoryUI.showEmptyHistoryMessage(historyDiv, clearHistoryBtn);
       return;
     }
 
@@ -167,6 +150,18 @@ class CalculationHistoryUI {
       historyDiv.textContent = "";
       CalculationHistoryUI.displayCalcuations();
     });
+  }
+
+  static showEmptyHistoryMessage(historyDiv, clearHistoryBtn) {
+    clearHistoryBtn.classList.remove("hover");
+    clearHistoryBtn.classList.remove("active");
+
+    const messageDiv = document.createElement("div");
+    messageDiv.textContent =
+      "Calculations that you save with equals button appear here";
+    messageDiv.className = "empty-history-message";
+
+    historyDiv.appendChild(messageDiv);
   }
 
   static deleteCalculation(historyCalculationContainer) {
