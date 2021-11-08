@@ -69,11 +69,6 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.btn-control:hover {
-  cursor: pointer;
-  opacity: 0.85;
-}
-
 /* Button click effect */
 .btn-control:active {
   padding: 0.75px;
@@ -127,10 +122,6 @@ body {
   margin-bottom: 0;
 }
 
-.history-calculation-container:hover {
-  background-color: #101010;
-}
-
 .history-calculation {
   font-size: 18px;
   padding: 9px;
@@ -154,11 +145,6 @@ body {
   display: grid;
   justify-content: center;
   margin: auto 1em;
-}
-
-.delete-calculation-btn:hover {
-  color: #dc3545;
-  cursor: pointer;
 }
 
 .delete-calculation-btn:active {
@@ -189,11 +175,6 @@ body {
   border: none;
   outline: none;
   text-align: center;
-}
-
-.clear-history-btn.hover:hover {
-  cursor: pointer;
-  opacity: 0.85;
 }
 
 .clear-history-btn.active:active {
@@ -228,11 +209,6 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.btn-calc:hover {
-  cursor: pointer;
-  background-color: #343434;
-}
-
 /* Button click effect */
 .btn-calc:active {
   font-size: 1.3em;
@@ -262,6 +238,33 @@ body {
   background-color: #427e04;
 }
 
-#equals:hover {
-  opacity: 0.85;
+/* Non touch screen devices */
+@media (hover: hover) and (pointer: fine) {
+  .btn-control:hover {
+    cursor: pointer;
+    opacity: 0.85;
+  }
+
+  .history-calculation-container:hover {
+    background-color: #101010;
+  }
+
+  .delete-calculation-btn:hover {
+    color: #dc3545;
+    cursor: pointer;
+  }
+
+  .clear-history-btn.hover:hover {
+    cursor: pointer;
+    opacity: 0.85;
+  }
+
+  .btn-calc:hover {
+    cursor: pointer;
+    background-color: #343434;
+  }
+
+  #equals:hover {
+    opacity: 0.85;
+  }
 }
