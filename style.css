@@ -122,6 +122,15 @@ body {
   margin-bottom: 0;
 }
 
+.history-calculation-container:active {
+  /* For touch screen devices only */
+  background-color: #101010;
+
+  /* Remove the highlight on button press (i.e. on touch screen devices) */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 .history-calculation {
   font-size: 18px;
   padding: 9px;
