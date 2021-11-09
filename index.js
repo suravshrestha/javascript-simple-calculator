@@ -386,8 +386,20 @@ parenthesisBtn.addEventListener("click", () => {
     span.textContent = ")";
   } else if (/[0-9)%]/.test(prevText)) {
     // Parenthesis button clicked after number or ) or %
-    span.innerHTML = `<span style="color:#94fc13"> &times;</span><span> (</span>`;
+    const timesSpan = document.createElement("span");
+    timesSpan.textContent = " × ";
+    timesSpan.style.color = "#94fc13";
+
+    const parenthesisSpan = document.createElement("span");
+    parenthesisSpan.textContent = "(";
+    parenthesisSpan.style.color = "#fafafa";
+
+    expInputEl.appendChild(timesSpan);
+    expInputEl.appendChild(parenthesisSpan);
+
     openingParenthesisClicked = 1;
+
+    return;
   } else {
     span.textContent = "(";
     openingParenthesisClicked = 1;
