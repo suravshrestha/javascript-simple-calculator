@@ -458,8 +458,16 @@ negateBtn.addEventListener("click", () => {
     }
   } else if (prevText === "%") {
     // % changes to % × (-
-    span.innerHTML = `<span style="color:#94fc13"> × </span><span>(−</span>`;
-    expInputEl.appendChild(span);
+    const timesSpan = document.createElement("span");
+    timesSpan.textContent = " × ";
+    timesSpan.style.color = "#94fc13";
+
+    const negateSpan = document.createElement("span");
+    negateSpan.textContent = "(−";
+    negateSpan.style.color = "#fafafa";
+
+    expInputEl.appendChild(timesSpan);
+    expInputEl.appendChild(negateSpan);
   } else {
     // Empty previous text or an operator (+, −, ×, ÷)
     span.textContent = "(−";
