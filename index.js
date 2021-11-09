@@ -280,9 +280,18 @@ numBtns.forEach((numBtn) => {
       (expInputEl.lastElementChild.textContent === "%" ||
         expInputEl.lastElementChild.textContent === ")")
     ) {
-      span.innerHTML =
-        `<span style="color: #94fc13"> &times; </span>` +
-        `<span style="color: #fafafa">${e.target.textContent}</span>`;
+      const timesSpan = document.createElement("span");
+      timesSpan.textContent = " × ";
+      timesSpan.style.color = "#94fc13";
+
+      const numSpan = document.createElement("span");
+      numSpan.textContent = e.target.textContent;
+      numSpan.style.color = "#fafafa";
+
+      expInputEl.appendChild(timesSpan);
+      expInputEl.appendChild(numSpan);
+
+      return;
     } else {
       span.textContent = e.target.textContent;
       span.style.color = "#fafafa";
