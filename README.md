@@ -11,7 +11,7 @@ git clone https://github.com/suravshrestha/javascript-simple-calculator.git
 
 2.  Navigate to the project directory :open_file_folder:
 ```
-cd .\JavaScript-Simple-Calculator\
+cd .\javascript-simple-calculator\
 ```
 
 3.  Run index.html
