@@ -430,14 +430,14 @@ negateBtn.addEventListener("click", () => {
   const span = document.createElement("span");
   span.style.color = "#fafafa";
 
-  if (secondLastText === "(−" || secondLastText === " × (−") {
+  if (secondLastText === "(−") {
     // Use of negate button after (negate button + digit)
     expInputEl.removeChild(secondLastEl);
   } else if (prevText === "(−") {
     // Use of negate button only
     expInputEl.removeChild(prevEl);
   } else if (secondLastText === "−" && thirdLastText === "(") {
-    // Use of negate button after ('(' + '-' + number)
+    // Use of negate button after ('(' + '-' + digit)
     expInputEl.removeChild(secondLastEl);
     expInputEl.removeChild(thirdLastEl);
   } else if (prevText === "−" && secondLastText === "(") {
@@ -460,9 +460,15 @@ negateBtn.addEventListener("click", () => {
     const lastEl = expInputEl.lastElementChild;
     const lastText = lastEl ? lastEl.textContent : null;
 
+    const secondLastEl = lastEl ? lastEl.previousElementSibling : null;
+    const secondLastText = secondLastEl ? secondLastEl.textContent : null;
+
     // Toggle negation
     if (lastText === "(−") {
       expInputEl.removeChild(lastEl);
+    } else if (lastText === "−" && secondLastText === "(") {
+      expInputEl.removeChild(lastEl);
+      expInputEl.removeChild(secondLastEl);
     } else {
       const negateSpan = document.createElement("span");
       negateSpan.textContent = "(−";
