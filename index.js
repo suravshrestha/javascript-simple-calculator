@@ -445,6 +445,8 @@ negateBtn.addEventListener("click", () => {
     expInputEl.removeChild(prevEl);
     expInputEl.removeChild(secondLastEl);
   } else if (/[0-9]/g.test(prevText)) {
+    // This case can handle all the above cases. For only the sake of speed the above edge cases have been used.
+
     // Use of negate button after number
     const expressionTokens = expInputEl.textContent.split(/[\s(−]/);
     const lastNumber = expressionTokens[expressionTokens.length - 1];
@@ -465,8 +467,10 @@ negateBtn.addEventListener("click", () => {
 
     // Toggle negation
     if (lastText === "(−") {
+      // Use of negate button after (negate button + number)
       expInputEl.removeChild(lastEl);
     } else if (lastText === "−" && secondLastText === "(") {
+      // Use of negate button after ('(' + '-' + number)
       expInputEl.removeChild(lastEl);
       expInputEl.removeChild(secondLastEl);
     } else {
