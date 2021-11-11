@@ -15,6 +15,8 @@ const decimalBtn = document.getElementById("decimal");
 const historyBtn = document.getElementById("history");
 const keyboard = document.querySelector(".keyboard");
 
+const syntaxErrorPopup = document.querySelector(".syntax-error-popup");
+
 let operatorClicked = 0;
 let openingParenthesisClicked = 0;
 
@@ -188,6 +190,7 @@ function evaluateExpression() {
     output.textContent = eval(expression);
   } catch (error) {
     output.textContent = "";
+    return null;
   }
 }
 
@@ -225,6 +228,8 @@ function callback(mutationsList, observer) {
   for (const mutation of mutationsList) {
     if (mutation.type === "childList") {
       // A chlid node has been added or removed
+      syntaxErrorPopup.classList.remove("visible"); // Remove the syntax error message
+
       evaluateExpression();
 
       if (expInputEl.lastElementChild) {
@@ -356,7 +361,19 @@ equalsBtn.addEventListener("click", () => {
 
   const answer = output.textContent;
 
+  if (evaluateExpression() === null) {
+    // Error popup message (invalid expression)
+    if (syntaxErrorPopup.classList.contains("visible")) {
+      // Repeated equals click
+      return;
+    }
+    
+    syntaxErrorPopup.classList.add("visible");
+    return;
+  }
+
   if (answer === "") {
+    // Empty input
     return;
   }
 

@@ -248,6 +248,37 @@ body {
   background-color: #427e04;
 }
 
+.syntax-error-popup {
+  /* || Font and text */
+  font-size: 23px;
+  text-align: center;
+
+  /* || Color */
+  color: #fafafa;
+  background-color: #101010;
+
+  /* || Box model */
+  padding: 1px 5px;
+  border: #343434 solid 3px;
+
+  /* || Positioning */
+  position: absolute;
+  top: 17%;
+  right: 3.5%;
+
+  /* || Effects */
+  /* transition: all 0.3s ease; */
+  border-radius: 10px;
+
+  /* || Others */
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
 /* Non touch screen devices */
 @media (hover: hover) and (pointer: fine) {
   .btn-control:hover {
