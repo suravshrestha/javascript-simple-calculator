@@ -526,6 +526,7 @@ negateBtn.addEventListener("click", () => {
 decimalBtn.addEventListener("click", () => {
   if (expInputEl.lastElementChild === null) {
     // First decimal
+    expInputEl.innerHTML = `<span style="color:#fafafa;">0</span><span style="color:#fafafa;">.</span>`;
     return;
   }
 
