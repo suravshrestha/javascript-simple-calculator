@@ -160,7 +160,7 @@ class CalculationHistoryUI {
 
     const messageDiv = document.createElement("div");
     messageDiv.textContent =
-      "Calculations that you save with equals button appear here";
+      "Your calculations and results appear here so that you can reuse them";
     messageDiv.className = "empty-history-message";
 
     historyDiv.appendChild(messageDiv);
@@ -367,7 +367,7 @@ equalsBtn.addEventListener("click", () => {
       // Repeated equals click
       return;
     }
-    
+
     syntaxErrorPopup.classList.add("visible");
     return;
   }

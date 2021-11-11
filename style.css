@@ -99,7 +99,7 @@ body {
 }
 
 .empty-history-message {
-  font-size: small;
+  font-size: medium;
   opacity: 0.85;
   border: 4px solid #212121;
   border-radius: 10px;
