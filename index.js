@@ -537,11 +537,33 @@ decimalBtn.addEventListener("click", () => {
     return;
   }
 
-  const span = document.createElement("span");
-  span.textContent = ".";
-  span.style.color = "#fafafa";
+  const prevText = expInputEl.lastElementChild.textContent;
 
-  expInputEl.appendChild(span);
+  const times = document.createElement("span");
+  const zero = document.createElement("span");
+  const decimal = document.createElement("span");
+
+  times.style.color = "#94fc13";
+  zero.style.color = "#fafafa";
+  decimal.style.color = "#fafafa";
+
+  times.textContent = " × ";
+  zero.textContent = "0";
+  decimal.textContent = ".";
+
+  if (/[+−×/(]/.test(prevText)) {
+    // Decimal after +, −, ×, / or (
+    expInputEl.appendChild(zero);
+    expInputEl.appendChild(decimal);
+  } else if (/[%]/.test(prevText)) {
+    // Decimal after %
+    expInputEl.appendChild(times);
+    expInputEl.appendChild(zero);
+    expInputEl.appendChild(decimal);
+  } else {
+    // Decimal after number
+    expInputEl.appendChild(decimal);
+  }
 });
 
 historyBtn.addEventListener("click", () => {
