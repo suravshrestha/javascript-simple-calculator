@@ -80,7 +80,7 @@ class Store {
 
 // Handles UI tasks for calculation history
 class CalculationHistoryUI {
-  static displayCalcuations() {
+  static displayCalculations() {
     const historyDiv = document.querySelector(".history-div");
     const clearHistoryBtn = document.querySelector(".clear-history-btn");
 
@@ -150,7 +150,7 @@ class CalculationHistoryUI {
     clearHistoryBtn.addEventListener("click", () => {
       localStorage.setItem("calculations", JSON.stringify([])); // Clear the local storage
       historyDiv.textContent = "";
-      CalculationHistoryUI.displayCalcuations();
+      CalculationHistoryUI.displayCalculations();
     });
   }
 
@@ -577,5 +577,5 @@ historyBtn.addEventListener("click", () => {
 
   keyboard.appendChild(mainDiv);
 
-  CalculationHistoryUI.displayCalcuations();
+  CalculationHistoryUI.displayCalculations();
 });
