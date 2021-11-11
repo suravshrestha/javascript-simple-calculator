@@ -18,7 +18,6 @@ const keyboard = document.querySelector(".keyboard");
 const syntaxErrorPopup = document.querySelector(".syntax-error-popup");
 
 let operatorClicked = 0;
-let openingParenthesisClicked = 0;
 
 // Represents a calculation history
 class Calculation {
@@ -250,7 +249,6 @@ clearBtn.addEventListener("click", () => {
   output.textContent = "";
 
   operatorClicked = 0;
-  openingParenthesisClicked = 0;
 });
 
 backspaceBtn.addEventListener("click", () => {
@@ -276,7 +274,6 @@ numBtns.forEach((numBtn) => {
     }
 
     operatorClicked = 0;
-    openingParenthesisClicked = 0;
 
     const span = document.createElement("span");
 
@@ -327,7 +324,6 @@ operatorBtns.forEach((operatorBtn) => {
     }
 
     operatorClicked = e.target.id === "percent" ? 0 : 1; // Allow operation if previous operator = %
-    openingParenthesisClicked = 0;
 
     const span = document.createElement("span");
 
@@ -407,7 +403,6 @@ parenthesisBtn.addEventListener("click", () => {
   if (/[(+−×/]/.test(prevText)) {
     // Parenthesis button clicked after opening parenthesis or negate button or +,−,×, or /
     span.textContent = "(";
-    openingParenthesisClicked = 1;
   } else if (unclosedParenthesisCount() >= 1) {
     span.textContent = ")";
   } else if (/[0-9)%]/.test(prevText)) {
@@ -423,12 +418,9 @@ parenthesisBtn.addEventListener("click", () => {
     expInputEl.appendChild(timesSpan);
     expInputEl.appendChild(parenthesisSpan);
 
-    openingParenthesisClicked = 1;
-
     return;
   } else {
     span.textContent = "(";
-    openingParenthesisClicked = 1;
   }
 
   expInputEl.appendChild(span);
