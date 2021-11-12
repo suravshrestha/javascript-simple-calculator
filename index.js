@@ -13,6 +13,8 @@ const negateBtn = document.getElementById("negate");
 const decimalBtn = document.getElementById("decimal");
 
 const historyBtn = document.getElementById("history");
+historyBtn.setAttribute("title", "Show calculation history");
+
 const keyboard = document.querySelector(".keyboard");
 
 const syntaxErrorPopup = document.querySelector(".syntax-error-popup");
@@ -567,8 +569,12 @@ historyBtn.addEventListener("click", () => {
     const historyMainDiv = document.querySelector(".history-main-div");
     keyboard.removeChild(historyMainDiv);
 
+    historyBtn.setAttribute("title", "Show calculation history");
+
     return;
   }
+
+  historyBtn.setAttribute("title", "Show keyboard");
 
   const mainDiv = document.createElement("div");
   const historyDiv = document.createElement("div");
