@@ -4,6 +4,21 @@
 <svg class="tab-icon" version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="700.000000pt" height="700.000000pt" viewBox="0 0 700.000000 700.000000"
  preserveAspectRatio="xMidYMid meet">
+
+<style>
+  @media (prefers-color-scheme: dark){
+    path{
+      fill: #fafafa;
+    }
+  }
+
+  @media (prefers-color-scheme: light){
+    path{
+      fill: #101010;
+    }
+  }
+</style>
+
 <metadata>
 Created by potrace 1.14, written by Peter Selinger 2001-2017
 </metadata>
