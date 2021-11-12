@@ -1,5 +1,5 @@
 # Simple JavaScript Calculator
-It is a simple calculator having operator compatibility made with HTML, CSS and vanilla JavaScript without any framework or library except BootStrap Icons.
+It is a simple calculator having operator compatibility made with HTML, CSS and vanilla JavaScript without any framework or library except Bootstrap Icons.
 
 [Live Demo](https://suravshrestha.github.io/javascript-simple-calculator/)
 
@@ -11,10 +11,10 @@ git clone https://github.com/suravshrestha/javascript-simple-calculator.git
 
 2.  Navigate to the project directory :open_file_folder:
 ```
-cd .\javascript-simple-calculator\
+cd javascript-simple-calculator
 ```
 
 3.  Run index.html
 ```
-.\index.html
+index.html
 ```
